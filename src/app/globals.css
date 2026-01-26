@@ -3,7 +3,7 @@
 @theme inline {
   --color-background: var(--background);
   --color-surface: var(--surface);
-  --color-border: var(--border);
+  --color-divider: var(--divider);
   --color-foreground: var(--foreground);
   --color-muted: var(--muted);
   --color-primary: var(--primary);
@@ -16,7 +16,7 @@
 :root {
   --background: oklch(1 0 0);
   --surface: oklch(0.985 0 0);
-  --border: oklch(0.922 0 0);
+  --divider: oklch(0.922 0 0);
   --foreground: oklch(0.145 0 0);
   --muted: oklch(0.556 0 0);
   --primary: oklch(0.58 0.23 270);
@@ -29,7 +29,7 @@
 .dark {
   --background: oklch(0.145 0 0);
   --surface: oklch(0.145 0 0);
-  --border: oklch(0.27 0 0);
+  --divider: oklch(0.27 0 0);
   --foreground: oklch(0.985 0 0);
   --muted: oklch(0.708 0 0);
   --primary: oklch(0.68 0.23 270);
@@ -37,4 +37,10 @@
   --success: oklch(0.72 0.23 145);
   --warning: oklch(0.75 0.19 85);
   --error: oklch(0.62 0.24 25);
+}
+
+@layer base {
+  body {
+    @apply bg-background text-foreground;
+  }
 }

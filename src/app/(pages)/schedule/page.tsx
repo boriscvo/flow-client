@@ -1,3 +1,10 @@
+import { PageContent } from "@/components/atoms"
+import { Reminders } from "./modules"
+
 export default function Schedule() {
-  return <div>Schedule page</div>
+  return (
+    <PageContent>
+      <Reminders />
+    </PageContent>
+  )
 }
