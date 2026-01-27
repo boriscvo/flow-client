@@ -13,7 +13,7 @@ export function Actions({
 > &
   Pick<ReminderCardType, "id">) {
   return (
-    <div className="flex md:px-6 md:py-2 justify-between border-t-2 border-divider">
+    <div className="flex md:px-6 md:py-2 justify-between border-t border-divider">
       <div className="flex gap-x-6">
         <Button
           variant="inline-card"

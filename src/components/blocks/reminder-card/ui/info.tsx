@@ -3,5 +3,9 @@ type Props = {
 }
 
 export function Info({ children }: Props) {
-  return <div className="md:px-6 md:py-5 flex flex-col w-full">{children}</div>
+  return (
+    <div className="md:px-6 md:pt-5 md:pb-4 flex flex-col w-full">
+      {children}
+    </div>
+  )
 }

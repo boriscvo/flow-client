@@ -33,9 +33,7 @@ export function Text({ variant, children, className }: Props) {
       return <p className={`text-foreground ${className}`}>{children}</p>
     case "card-misc":
       return (
-        <p
-          className={`text-sm font-semibold text-muted-foreground ${className}`}
-        >
+        <p className={`text-sm font-semibold text-muted ${className}`}>
           {children}
         </p>
       )

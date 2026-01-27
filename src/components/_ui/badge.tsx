@@ -5,7 +5,7 @@ import { cva, type VariantProps } from "class-variance-authority"
 import { cn } from "@/lib/utils"
 
 const badgeVariants = cva(
-  "inline-flex items-center justify-center rounded-full border border-transparent px-2 py-0.5 text-xs font-medium w-fit whitespace-nowrap shrink-0 [&>svg]:size-3 gap-1 [&>svg]:pointer-events-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive transition-[color,box-shadow] overflow-hidden",
+  "inline-flex items-center justify-center rounded-full border select-none border-transparent px-2 py-0.5 text-xs font-medium w-fit whitespace-nowrap shrink-0 [&>svg]:size-3 gap-1 [&>svg]:pointer-events-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive transition-[color,box-shadow] overflow-hidden",
   {
     variants: {
       variant: {
@@ -19,6 +19,14 @@ const badgeVariants = cva(
         ghost: "[a&]:hover:bg-accent [a&]:hover:text-accent-foreground",
         link: "text-primary underline-offset-4 [a&]:hover:underline",
         success: "bg-success text-success-foreground [a&]:hover:bg-success/90",
+        "card-success":
+          "bg-card-success-bg text-card-success-text border-card-success-text",
+        "card-warning":
+          "bg-card-warning-bg text-card-warning-text border-card-warning-text",
+        "card-error":
+          "bg-card-error-bg text-card-error-text border-card-error-text",
+        "card-info":
+          "bg-card-info-bg text-card-info-text border-card-info-text",
         warning: "bg-warning text-warning-foreground [a&]:hover:bg-warning/90",
         error: "bg-error text-error-foreground [a&]:hover:bg-error/90",
       },

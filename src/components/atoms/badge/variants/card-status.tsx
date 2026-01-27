@@ -9,19 +9,19 @@ export function CardStatus({
   switch (state) {
     case "completed":
       return (
-        <Badge variant="success">
+        <Badge variant="card-success">
           <Formatted variant="status" label={label} />
         </Badge>
       )
     case "scheduled":
       return (
-        <Badge variant="warning">
+        <Badge variant="card-warning">
           <Formatted variant="status" label={label} />
         </Badge>
       )
     case "failed":
       return (
-        <Badge variant="error">
+        <Badge variant="card-error">
           <Formatted variant="status" label={label} />
         </Badge>
       )
