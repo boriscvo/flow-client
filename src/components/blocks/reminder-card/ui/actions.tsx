@@ -21,7 +21,7 @@ export function Actions({
       <div className="flex gap-x-6">
         <Button
           variant="inline-card"
-          label="View Details"
+          label="View More"
           state="default"
           iconSlot={
             <ReceiptText strokeWidth={2.5} className="text-foreground" />

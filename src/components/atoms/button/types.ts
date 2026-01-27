@@ -3,6 +3,11 @@ export type CommonButtonProps = {
   handleClick: () => void
 }
 
+export type MainButtonProps = CommonButtonProps & {
+  variant: "default" | "secondary" | "destructive" | "outline"
+  isDisabled?: boolean
+}
+
 export type InlineCardButtonProps = CommonButtonProps & {
   variant: "inline-card"
   state: "default" | "loading" | "disabled" | "done" | "error"
@@ -10,4 +15,4 @@ export type InlineCardButtonProps = CommonButtonProps & {
   isDestructive?: boolean // Not the fan of booleans in general but let's have it here
 }
 
-export type ButtonProps = InlineCardButtonProps
+export type ButtonProps = InlineCardButtonProps | MainButtonProps

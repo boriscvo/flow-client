@@ -26,9 +26,7 @@ export function ReminderCard({
           <Description titleSlot={title} messageSlot={message} />
           <TimeIndicator scheduledAt={scheduledAt} />
         </Main>
-        <Text variant="card-misc" className="mt-6">
-          Phone: {phoneNumber}
-        </Text>
+        <Text variant="card-misc">Phone: {phoneNumber}</Text>
         <BadgeLine>
           <Badge variant="card-status" state={status} label={status} />
           <Badge variant="info" label={timezone} />

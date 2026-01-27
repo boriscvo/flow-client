@@ -1,4 +1,4 @@
-import { ReminderStatus } from "@/types/common/reminder-status"
+import { ReminderStatus } from "@/types/api/reminder"
 
 export type CommonBadgeProps = {
   label: string
