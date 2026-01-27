@@ -1,4 +1,4 @@
-import { BellDot, Pencil, Trash } from "lucide-react"
+import { BellDot, Pencil, Trash, ReceiptText } from "lucide-react"
 import { ReminderCardProps, ReminderCardType } from "../types"
 import { Button } from "@/components/atoms"
 
@@ -7,9 +7,13 @@ export function Actions({
   handleOpenDelete,
   handleOpenSnooze,
   handleOpenEdit,
+  handleOpenDetails,
 }: Pick<
   ReminderCardProps,
-  "handleOpenDelete" | "handleOpenSnooze" | "handleOpenEdit"
+  | "handleOpenDelete"
+  | "handleOpenSnooze"
+  | "handleOpenEdit"
+  | "handleOpenDetails"
 > &
   Pick<ReminderCardType, "id">) {
   return (
@@ -17,19 +21,32 @@ export function Actions({
       <div className="flex gap-x-6">
         <Button
           variant="inline-card"
-          label="Edit"
+          label="View Details"
           state="default"
           iconSlot={
-            <Pencil size={20} strokeWidth={2.5} className="text-foreground" />
+            <ReceiptText strokeWidth={2.5} className="text-foreground" />
           }
+          handleClick={() => handleOpenDetails(id)}
+        />
+        <Button
+          variant="inline-card"
+          label="Edit"
+          state="default"
+          iconSlot={<Pencil strokeWidth={2.5} className="text-foreground" />}
           handleClick={() => handleOpenEdit(id)}
         />
         <Button
           variant="inline-card"
           label="Delete"
           state="default"
-          iconSlot={<Trash strokeWidth={2.5} className="text-foreground" />}
+          iconSlot={
+            <Trash
+              strokeWidth={2.5}
+              className="hover:text-card-error-text/80"
+            />
+          }
           handleClick={() => handleOpenDelete(id)}
+          isDestructive
         />
       </div>
       <div>

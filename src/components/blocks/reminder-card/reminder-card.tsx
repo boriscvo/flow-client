@@ -15,6 +15,7 @@ export function ReminderCard({
   handleOpenDelete,
   handleOpenSnooze,
   handleOpenEdit,
+  handleOpenDetails,
 }: ReminderCardProps) {
   const { id, title, message, scheduledAt, timezone, phoneNumber, status } =
     reminder
@@ -38,6 +39,7 @@ export function ReminderCard({
         handleOpenDelete={handleOpenDelete}
         handleOpenSnooze={handleOpenSnooze}
         handleOpenEdit={handleOpenEdit}
+        handleOpenDetails={handleOpenDetails}
       />
     </Container>
   )
