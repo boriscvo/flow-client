@@ -34,7 +34,7 @@ export const remindersMock = [
     id: "4",
     title: "Dentist appointment",
     message: "Reminder for dentist appointment.",
-    scheduledAt: "2026-01-27T11:15:00Z",
+    scheduledAt: "2026-01-30T11:15:00Z",
     timezone: "Europe/Belgrade",
     phoneNumber: "****5678",
     status: "scheduled",
