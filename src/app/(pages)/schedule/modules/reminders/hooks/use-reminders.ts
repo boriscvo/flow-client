@@ -93,14 +93,14 @@ export function useReminders() {
   }
 
   return {
-    remindersMock,
+    reminders: remindersMock,
     isOpenDelete,
     isOpenDetails,
     selectedReminder,
     reminderDeleteExcerpt,
     handleOpenDelete,
-    handleCloseDelete,
     handleOpenDetails,
+    handleCloseDelete,
     handleCloseDetails,
     handleSelectReminder,
   }

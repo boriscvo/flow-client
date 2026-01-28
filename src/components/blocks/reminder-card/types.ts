@@ -8,10 +8,19 @@ export type ReminderCardType = {
   status: "scheduled" | "completed" | "failed"
 }
 
-export type ReminderCardProps = {
+export type ReminderCardPlaceholderType = {
+  variant: "placeholder"
+}
+
+export type ReminderCardFullType = {
+  variant: "component"
   reminder: ReminderCardType
   handleOpenDelete: (id: string) => void
   handleOpenSnooze: (id: string) => void
   handleOpenEdit: (id: string) => void
   handleOpenDetails: (id: string) => void
 }
+
+export type ReminderCardProps =
+  | ReminderCardFullType
+  | ReminderCardPlaceholderType

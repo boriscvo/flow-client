@@ -3,6 +3,7 @@ type Props = {
     | "section-title"
     | "card-title"
     | "main-label"
+    | "main-message"
     | "card-message"
     | "card-misc"
     | "key-label"
@@ -31,6 +32,12 @@ export function Text({ variant, children, className }: Props) {
       )
     case "card-message":
       return <p className={`text-foreground ${className || ""}`}>{children}</p>
+    case "main-message":
+      return (
+        <p className={`text-muted font-medium ${className || ""}`}>
+          {children}
+        </p>
+      )
     case "card-misc":
       return <p className={`text-sm font-semibold text-muted`}>{children}</p>
     case "key-label":

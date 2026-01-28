@@ -1,18 +1,18 @@
 "use client"
-import { Dialog, ReminderCard } from "@/components/blocks"
-import { DeleteAlert, Details, RemindersTitle } from "./ui"
+import { Dialog } from "@/components/blocks"
+import { Container, Content, DeleteAlert, Details, RemindersTitle } from "./ui"
 import { useReminderForm, useReminders } from "./hooks"
 
 export function Reminders() {
   const {
-    remindersMock,
+    reminders,
     isOpenDelete,
     isOpenDetails,
     selectedReminder,
     reminderDeleteExcerpt,
     handleOpenDelete,
-    handleCloseDelete,
     handleOpenDetails,
+    handleCloseDelete,
     handleCloseDetails,
     handleSelectReminder,
   } = useReminders()
@@ -31,21 +31,22 @@ export function Reminders() {
 
   return (
     <>
-      <RemindersTitle handleClick={handleFormOpen} />
-      <div className="flex flex-col gap-4">
-        {remindersMock.map((reminder) => {
-          return (
-            <ReminderCard
-              key={reminder.id}
-              reminder={reminder}
-              handleOpenDelete={handleOpenDelete}
-              handleOpenDetails={handleOpenDetails}
-              handleOpenEdit={handleFormOpen}
-              handleOpenSnooze={() => {}}
-            />
-          )
-        })}
-      </div>
+      <RemindersTitle
+        shouldShowAddNew={reminders.length > 0}
+        handleClick={handleFormOpen}
+      />
+      <Container>
+        <Content
+          state="success"
+          reminders={reminders}
+          handlers={{
+            handleOpenDelete,
+            handleOpenDetails,
+            handleFormOpen,
+            handleOpenSnooze: () => {},
+          }}
+        />
+      </Container>
       <Dialog
         variant="details"
         title="Reminder Details"
