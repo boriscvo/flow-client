@@ -18,6 +18,7 @@ export type ReminderUpdateType = {
   title: string
   message: string
   phoneNumber: string
-  createdAt: string
+  scheduledAtDate: string
+  scheduledAtTime: string
   timezone: string
 }

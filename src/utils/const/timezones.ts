@@ -1,0 +1,28 @@
+export const TIMEZONE_OPTIONS = [
+  { label: "UTC", value: "UTC" },
+
+  // Europe
+  { label: "London (GMT)", value: "Europe/London" },
+  { label: "Dublin (GMT)", value: "Europe/Dublin" },
+  { label: "Berlin (CET)", value: "Europe/Berlin" },
+  { label: "Paris (CET)", value: "Europe/Paris" },
+  { label: "Belgrade (CET)", value: "Europe/Belgrade" },
+  { label: "Rome (CET)", value: "Europe/Rome" },
+  { label: "Madrid (CET)", value: "Europe/Madrid" },
+  { label: "Amsterdam (CET)", value: "Europe/Amsterdam" },
+  { label: "New York (ET)", value: "America/New_York" },
+  { label: "Chicago (CT)", value: "America/Chicago" },
+  { label: "Denver (MT)", value: "America/Denver" },
+  { label: "Los Angeles (PT)", value: "America/Los_Angeles" },
+  { label: "Toronto (ET)", value: "America/Toronto" },
+  { label: "Mexico City (CT)", value: "America/Mexico_City" },
+  { label: "São Paulo (BRT)", value: "America/Sao_Paulo" },
+  { label: "Dubai (GST)", value: "Asia/Dubai" },
+  { label: "Mumbai (IST)", value: "Asia/Kolkata" },
+  { label: "Singapore (SGT)", value: "Asia/Singapore" },
+  { label: "Hong Kong (HKT)", value: "Asia/Hong_Kong" },
+  { label: "Tokyo (JST)", value: "Asia/Tokyo" },
+  { label: "Seoul (KST)", value: "Asia/Seoul" },
+  { label: "Sydney (AEST)", value: "Australia/Sydney" },
+  { label: "Melbourne (AEST)", value: "Australia/Melbourne" },
+]

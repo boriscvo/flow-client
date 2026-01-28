@@ -7,7 +7,7 @@ import {
   DialogTitle,
 } from "@/components/_ui/dialog"
 import { KeyValueDialogProps } from "../types"
-import { Button } from "../../../atoms/button/button"
+import { Button } from "@/components/atoms"
 
 export function Details({
   isOpen,

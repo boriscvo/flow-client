@@ -15,6 +15,13 @@ export type InlineCardButtonProps = CommonButtonProps & {
   isDestructive?: boolean
 }
 
+export type FormTriggerButtonProps = {
+  label: string
+  variant: "form-trigger"
+  type?: "button" | "submit" | "reset"
+  version: "default" | "outline"
+}
+
 export type AddNewButtonProps = CommonButtonProps & {
   variant: "add-new"
 }
@@ -23,3 +30,4 @@ export type ButtonProps =
   | InlineCardButtonProps
   | MainButtonProps
   | AddNewButtonProps
+  | FormTriggerButtonProps

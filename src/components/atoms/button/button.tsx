@@ -1,5 +1,6 @@
 import { ButtonProps } from "./types"
 import { AddNew, InlineCard } from "./variants"
+import { Slot } from "@radix-ui/react-slot"
 import { Button as UIButton } from "@/components/_ui/button"
 
 export function Button(props: ButtonProps) {
@@ -13,12 +14,24 @@ export function Button(props: ButtonProps) {
       const { label, variant, handleClick } = props
       return (
         <UIButton
+          type="button"
           variant={variant}
           className="hover:cursor-pointer"
           onClick={handleClick}
         >
           {label}
         </UIButton>
+      )
+    }
+    case "form-trigger": {
+      return (
+        <Slot {...props}>
+          <UIButton
+            variant={props.version === "default" ? "default" : "outline"}
+          >
+            {props.label}
+          </UIButton>
+        </Slot>
       )
     }
     case "add-new": {
