@@ -17,11 +17,7 @@ export function InlineCard({
         isDestructive ? "hover:text-card-error-text/80" : ""
       }`}
     >
-      {state === "loading" ? (
-        <Loader2 size="24" className="animate-spin" />
-      ) : (
-        iconSlot
-      )}
+      {state === "loading" ? <Loader2 className="animate-spin" /> : iconSlot}
       {label}
     </UIButton>
   )

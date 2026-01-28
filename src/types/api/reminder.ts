@@ -13,3 +13,11 @@ export type ReminderType = {
   createdAt: string
   updatedAt?: string
 }
+
+export type ReminderUpdateType = {
+  title: string
+  message: string
+  phoneNumber: string
+  createdAt: string
+  timezone: string
+}

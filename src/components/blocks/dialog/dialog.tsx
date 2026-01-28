@@ -1,5 +1,5 @@
 import { DialogProps } from "./types"
-import { Alert, Details } from "./ui"
+import { Alert, Details, ReminderForm } from "./ui"
 
 export function Dialog(props: DialogProps) {
   switch (props.variant) {
@@ -8,6 +8,9 @@ export function Dialog(props: DialogProps) {
     }
     case "alert": {
       return <Alert {...props} />
+    }
+    case "reminder-form": {
+      return <ReminderForm {...props} />
     }
     default:
       return null

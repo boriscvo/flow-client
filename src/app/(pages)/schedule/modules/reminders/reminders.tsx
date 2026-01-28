@@ -1,34 +1,50 @@
 "use client"
 import { Dialog, ReminderCard } from "@/components/blocks"
-import { useReminders } from "./use-reminders"
-import { DeleteAlert, Details } from "./ui"
+import { DeleteAlert, Details, RemindersTitle } from "./ui"
+import { useReminderForm, useReminders } from "./hooks"
 
 export function Reminders() {
   const {
     remindersMock,
-    selectedReminder,
     isOpenDelete,
     isOpenDetails,
+    selectedReminder,
     reminderDeleteExcerpt,
     handleOpenDelete,
     handleCloseDelete,
-    handleCloseDetails,
     handleOpenDetails,
+    handleCloseDetails,
+    handleSelectReminder,
   } = useReminders()
+
+  const {
+    reminderData,
+    isFormOpen,
+    formLabel,
+    handleFormOpen,
+    handleFormClose,
+    handleSubmitReminder,
+  } = useReminderForm({
+    initialReminder: selectedReminder,
+    handleSelectReminder,
+  })
 
   return (
     <>
+      <RemindersTitle handleClick={handleFormOpen} />
       <div className="flex flex-col gap-4">
-        {remindersMock.map((reminder) => (
-          <ReminderCard
-            key={reminder.id}
-            reminder={reminder}
-            handleOpenDelete={() => handleOpenDelete(reminder.id)}
-            handleOpenDetails={() => handleOpenDetails(reminder.id)}
-            handleOpenEdit={() => {}}
-            handleOpenSnooze={() => {}}
-          />
-        ))}
+        {remindersMock.map((reminder) => {
+          return (
+            <ReminderCard
+              key={reminder.id}
+              reminder={reminder}
+              handleOpenDelete={handleOpenDelete}
+              handleOpenDetails={handleOpenDetails}
+              handleOpenEdit={handleFormOpen}
+              handleOpenSnooze={() => {}}
+            />
+          )
+        })}
       </div>
       <Dialog
         variant="details"
@@ -44,6 +60,14 @@ export function Reminders() {
         handleClose={handleCloseDelete}
         handleConfirm={() => {}}
         descriptionSlot={<DeleteAlert excerpt={reminderDeleteExcerpt} />}
+      />
+      <Dialog
+        variant="reminder-form"
+        isOpen={isFormOpen}
+        title={formLabel}
+        form={reminderData}
+        handleSubmit={handleSubmitReminder}
+        handleClose={handleFormClose}
       />
     </>
   )

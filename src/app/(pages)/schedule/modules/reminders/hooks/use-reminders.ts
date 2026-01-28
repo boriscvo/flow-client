@@ -55,34 +55,25 @@ export function useReminders() {
     "scheduledAt" | "title"
   > | null>(null)
 
-  const [isOpenEdit, setIsOpenEdit] = useState(false)
   const [isOpenDelete, setIsOpenDelete] = useState(false)
   const [isOpenDetails, setIsOpenDetails] = useState(false)
 
-  const handleOpenEdit = (id: string) => {
+  const handleSelectReminder = (id?: string | null) => {
     const reminder =
       remindersMock.find((reminder) => reminder.id === id) || null
     setSelectedReminder(reminder)
-    setIsOpenEdit(true)
-  }
-  const handleCloseEdit = () => {
-    setIsOpenEdit(false)
-    setSelectedReminder(null)
   }
 
   const handleOpenDelete = (id: string) => {
-    const reminderExcerpt =
-      remindersMock.find((reminder) => {
-        if (reminder.id === id) {
-          return {
-            scheduledAt: reminder.scheduledAt,
-            title: reminder.title,
-          }
+    const reminder = remindersMock.find((reminder) => reminder.id === id)
+    const reminderExcerpt = reminder
+      ? {
+          scheduledAt: reminder.scheduledAt,
+          title: reminder.title,
         }
-      }) || null
-    setReminderDeleteExcerpt(reminderExcerpt)
+      : null
+    setReminderDeleteExcerpt(reminderExcerpt || null)
     setReminderId(id)
-
     setIsOpenDelete(true)
   }
   const handleCloseDelete = () => {
@@ -94,27 +85,23 @@ export function useReminders() {
     const reminder =
       remindersMock.find((reminder) => reminder.id === id) || null
     setSelectedReminder(reminder)
-    setSelectedReminder(reminder)
     setIsOpenDetails(true)
   }
   const handleCloseDetails = () => {
     setIsOpenDetails(false)
-    setReminderId(null)
+    setSelectedReminder(null)
   }
 
   return {
     remindersMock,
-    isOpenEdit,
     isOpenDelete,
     isOpenDetails,
-    reminderId,
     selectedReminder,
     reminderDeleteExcerpt,
-    handleOpenEdit,
-    handleCloseEdit,
     handleOpenDelete,
     handleCloseDelete,
     handleOpenDetails,
     handleCloseDetails,
+    handleSelectReminder,
   }
 }

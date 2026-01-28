@@ -1,3 +1,6 @@
+import { ReminderUpdateType } from "@/types/api/reminder"
+import { UseFormReturn } from "react-hook-form"
+
 export type CommonDialogProps = {
   title: string
   isOpen: boolean
@@ -15,4 +18,13 @@ export type AlertDialogProps = CommonDialogProps & {
   handleConfirm: () => void
 }
 
-export type DialogProps = KeyValueDialogProps | AlertDialogProps
+export type ReminderFormDialogProps = CommonDialogProps & {
+  variant: "reminder-form"
+  form: UseFormReturn<ReminderUpdateType>
+  handleSubmit: () => void
+}
+
+export type DialogProps =
+  | KeyValueDialogProps
+  | AlertDialogProps
+  | ReminderFormDialogProps

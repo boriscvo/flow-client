@@ -1,5 +1,5 @@
 import { ButtonProps } from "./types"
-import { InlineCard } from "./variants"
+import { AddNew, InlineCard } from "./variants"
 import { Button as UIButton } from "@/components/_ui/button"
 
 export function Button(props: ButtonProps) {
@@ -10,16 +10,20 @@ export function Button(props: ButtonProps) {
     case "destructive":
     case "outline":
     case "default": {
-      const { label, handleClick, variant } = props
+      const { label, variant, handleClick } = props
       return (
         <UIButton
           variant={variant}
-          onClick={handleClick}
           className="hover:cursor-pointer"
+          onClick={handleClick}
         >
           {label}
         </UIButton>
       )
+    }
+    case "add-new": {
+      const { label, handleClick } = props
+      return <AddNew label={label} handleClick={handleClick} />
     }
   }
 }
