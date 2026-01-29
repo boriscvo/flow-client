@@ -16,7 +16,7 @@ export function Button(props: ButtonProps) {
         <UIButton
           type="button"
           variant={variant}
-          className="hover:cursor-pointer"
+          className="hover:cursor-pointer min-w-20"
           onClick={handleClick}
         >
           {label}
@@ -28,7 +28,7 @@ export function Button(props: ButtonProps) {
         <Slot {...props}>
           <UIButton
             variant={props.version === "default" ? "default" : "outline"}
-            className="hover:cursor-pointer"
+            className="hover:cursor-pointer min-w-20"
           >
             {props.label}
           </UIButton>

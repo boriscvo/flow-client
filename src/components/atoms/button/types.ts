@@ -16,7 +16,7 @@ export type InlineCardButtonProps = CommonButtonProps & {
 }
 
 export type FormTriggerButtonProps = {
-  label: string
+  label: string | React.ReactNode
   variant: "form-trigger"
   type?: "button" | "submit" | "reset"
   version: "default" | "outline"

@@ -31,11 +31,13 @@ import {
 } from "@/components/_ui/popover"
 import { Calendar } from "@/components/_ui/calendar"
 import { formatDate } from "date-fns"
+import { Loader2 } from "lucide-react"
 
 export function ReminderForm({
   isOpen,
   form,
   title,
+  isLoading,
   handleSubmit,
   handleClose,
 }: Omit<ReminderFormDialogProps, "variant">) {
@@ -53,7 +55,9 @@ export function ReminderForm({
             onSubmit={handleSubmit}
             className="max-sm:flex max-sm:flex-col max-sm:h-full"
           >
-            <div className="no-scrollbar space-y-4 -mx-4 max-h-[75vh] sm:max-h-[50vh] overflow-y-auto px-4 py-4">
+            <div
+              className={`no-scrollbar space-y-4 -mx-4 max-h-[75vh] sm:max-h-[50vh] overflow-y-auto px-4 py-4 ${isLoading ? "opacity-60 pointer-events-none" : ""}`}
+            >
               <FormField
                 control={form.control}
                 name="title"
@@ -87,7 +91,7 @@ export function ReminderForm({
                   <FormItem>
                     <FormLabel>Phone number</FormLabel>
                     <FormControl>
-                      <Input {...field} />
+                      <Input {...field} placeholder="e.g. +14155552671" />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -181,7 +185,9 @@ export function ReminderForm({
                 />
               </div>
             </div>
-            <DialogFooter className="max-sm:mt-auto mt-6 pt-2">
+            <DialogFooter
+              className={`max-sm:mt-auto mt-6 pt-2 ${isLoading ? "pointer-events-none" : ""}`}
+            >
               <Button
                 variant="outline"
                 label="Cancel"
@@ -191,7 +197,9 @@ export function ReminderForm({
                 variant="form-trigger"
                 type="submit"
                 version="default"
-                label="Save"
+                label={
+                  isLoading ? <Loader2 className="animate-spin" /> : "Save"
+                }
               />
             </DialogFooter>
           </form>

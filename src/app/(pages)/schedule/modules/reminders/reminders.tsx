@@ -21,6 +21,7 @@ export function Reminders() {
     reminderData,
     isFormOpen,
     formLabel,
+    status,
     handleFormOpen,
     handleFormClose,
     handleSubmitReminder,
@@ -67,6 +68,7 @@ export function Reminders() {
         isOpen={isFormOpen}
         title={formLabel}
         form={reminderData}
+        isLoading={status === "pending"}
         handleSubmit={handleSubmitReminder}
         handleClose={handleFormClose}
       />

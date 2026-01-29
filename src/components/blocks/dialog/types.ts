@@ -20,6 +20,7 @@ export type AlertDialogProps = CommonDialogProps & {
 
 export type ReminderFormDialogProps = CommonDialogProps & {
   variant: "reminder-form"
+  isLoading: boolean
   form: UseFormReturn<ReminderUpdateType>
   handleSubmit: () => void
 }

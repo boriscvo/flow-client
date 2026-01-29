@@ -30,6 +30,13 @@
 }
 
 :root {
+  --sonner-bg: oklch(0.965 0 0);
+  --sonner-text: oklch(0.145 0 0);
+  --sonner-border: oklch(0.922 0 0);
+
+  --sonner-success: oklch(0.72 0.23 145);
+  --sonner-error: oklch(0.55 0.2 25);
+
   --background: oklch(0.975 0 0);
   --surface: oklch(0.965 0 0);
   --divider: oklch(0.922 0 0);
@@ -67,7 +74,7 @@
   --divider: oklch(0.27 0 0);
 
   --foreground: oklch(0.985 0 0);
-  --muted: oklch(0.72 0 0); /* stronger */
+  --muted: oklch(0.72 0 0);
 
   --primary: oklch(0.68 0.23 270);
   --secondary: oklch(0.72 0.26 300);

@@ -2,10 +2,13 @@ import z from "zod"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { ReminderType } from "@/types/api/reminder"
-import { useEffect, useState } from "react"
-import { formatDate } from "date-fns"
+import { useEffect, useMemo, useState } from "react"
+import { format, formatDate, parse } from "date-fns"
 import { getBrowserTimezone } from "@/utils/helpers/get-browser-timezone"
 import { TIMEZONE_OPTIONS } from "@/utils/const/timezones"
+import { useMutation } from "@tanstack/react-query"
+import { postReminder } from "@/api/post-reminder"
+import { toast } from "sonner"
 
 type Args = {
   initialReminder?: ReminderType | null
@@ -15,7 +18,10 @@ type Args = {
 const ReminderFormSchema = z.object({
   title: z.string().min(1, "Title is required"),
   message: z.string().min(1, "Message is required"),
-  phoneNumber: z.string().regex(/^\+?[1-9]\d{1,14}$/, "Invalid phone number"),
+  phoneNumber: z
+    .string()
+    .transform((v) => v.replace(/\s+/g, ""))
+    .pipe(z.string().regex(/^\+[1-9]\d{1,14}$/, "Invalid phone number")),
   scheduledAtDate: z.string().min(1, "Date is required"),
   scheduledAtTime: z.string().min(1, "Time is required"),
   timezone: z.string().min(1, "Timezone is required"),
@@ -41,14 +47,10 @@ export function useReminderForm({
   handleSelectReminder,
 }: Args) {
   const [isFormOpen, setIsFormOpen] = useState(false)
-  const [formVariant, setFormVariant] = useState<"create" | "edit">("create")
 
   const handleFormOpen = (id?: string | null) => {
     if (id) {
       handleSelectReminder(id)
-      setFormVariant("edit")
-    } else {
-      setFormVariant("create")
     }
     setIsFormOpen(true)
   }
@@ -64,7 +66,33 @@ export function useReminderForm({
     defaultValues: DefaultFormValues,
   })
 
-  const handleSubmitReminder = reminderData.handleSubmit(() => {})
+  const { mutate, status } = useMutation({
+    mutationFn: postReminder,
+    onSuccess: () => {
+      toast.success(
+        formVariant === "edit"
+          ? "Reminder updated successfully"
+          : "Reminder saved successfully",
+      )
+      handleFormClose()
+    },
+    onError: (error) => {
+      toast.error(
+        error instanceof Error ? error.message : "Failed to save reminder",
+      )
+    },
+  })
+
+  const handleSubmitReminder = reminderData.handleSubmit((values) => {
+    const isoDate = format(
+      parse(values.scheduledAtDate, "M/d/yyyy", new Date()),
+      "yyyy-MM-dd",
+    )
+    mutate({
+      ...values,
+      scheduledAtDate: isoDate,
+    })
+  })
 
   useEffect(() => {
     if (initialReminder) {
@@ -85,11 +113,20 @@ export function useReminderForm({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [initialReminder])
 
+  const formVariant = useMemo(() => {
+    return initialReminder ? "edit" : "create"
+  }, [initialReminder])
+
+  const formLabel = useMemo(() => {
+    return initialReminder ? "Edit Reminder" : "Create Reminder"
+  }, [initialReminder])
+
   return {
     reminderData,
     isFormOpen,
     formVariant,
-    formLabel: formVariant === "create" ? "Create Reminder" : "Edit Reminder",
+    formLabel,
+    status,
     handleFormOpen,
     handleFormClose,
     handleSubmitReminder,
