@@ -13,6 +13,7 @@ import { toast } from "sonner"
 type Args = {
   initialReminder?: ReminderType | null
   handleSelectReminder: (id?: string | null) => void
+  handleRefetchReminders: () => void
 }
 
 const ReminderFormSchema = z.object({
@@ -45,6 +46,7 @@ type ReminderFormValues = z.infer<typeof ReminderFormSchema>
 export function useReminderForm({
   initialReminder,
   handleSelectReminder,
+  handleRefetchReminders,
 }: Args) {
   const [isFormOpen, setIsFormOpen] = useState(false)
 
@@ -66,7 +68,7 @@ export function useReminderForm({
     defaultValues: DefaultFormValues,
   })
 
-  const { mutate, status } = useMutation({
+  const { mutate, status: postReminderStatus } = useMutation({
     mutationFn: postReminder,
     onSuccess: () => {
       toast.success(
@@ -74,6 +76,7 @@ export function useReminderForm({
           ? "Reminder updated successfully"
           : "Reminder saved successfully",
       )
+      handleRefetchReminders()
       handleFormClose()
     },
     onError: (error) => {
@@ -100,7 +103,7 @@ export function useReminderForm({
       reminderData.reset({
         title: initialReminder.title,
         message: initialReminder.message,
-        phoneNumber: initialReminder.phoneNumber,
+        phoneNumber: "",
         scheduledAtDate: date.toLocaleDateString(),
         scheduledAtTime: formatDate(date, "HH:mm"),
         timezone: initialReminder.timezone,
@@ -126,7 +129,7 @@ export function useReminderForm({
     isFormOpen,
     formVariant,
     formLabel,
-    status,
+    postReminderStatus,
     handleFormOpen,
     handleFormClose,
     handleSubmitReminder,

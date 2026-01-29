@@ -3,14 +3,16 @@ import { getDayOnlyLabel } from "@/utils/helpers/get-day-only-label"
 
 type Props = {
   scheduledAt: string
+  timezone: string
 }
 
-export function TimeIndicator({ scheduledAt }: Props) {
+export function TimeIndicator({ scheduledAt, timezone }: Props) {
   const dateFromLabel = new Date(scheduledAt)
   const labelOnly = getDayOnlyLabel(dateFromLabel)
-  const formattedTime = new Date(scheduledAt).toLocaleTimeString("en-US", {
+  const formattedTime = dateFromLabel.toLocaleTimeString("en-US", {
     hour: "2-digit",
     minute: "2-digit",
+    timeZone: timezone,
   })
 
   return (

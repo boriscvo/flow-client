@@ -33,7 +33,7 @@ export function ReminderCard(props: ReminderCardProps) {
     <Container>
       <Info>
         <Main>
-          <TimeIndicator scheduledAt={scheduledAt} />
+          <TimeIndicator scheduledAt={scheduledAt} timezone={timezone} />
           <Description>
             <Text variant="card-title">{title}</Text>
             <Text

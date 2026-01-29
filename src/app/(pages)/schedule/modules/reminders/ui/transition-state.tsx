@@ -1,13 +1,10 @@
 import { ReminderCard } from "@/components/blocks"
 import { ErrorState } from "./error-state"
 import { EmptyState } from "./empty-state"
+import { ReminderTransitionStateProps } from "../types"
 
-type Props = {
-  variant: "loading" | "error" | "empty"
-}
-
-export function TransitionState({ variant }: Props) {
-  switch (variant) {
+export function TransitionState(props: ReminderTransitionStateProps) {
+  switch (props.variant) {
     case "loading":
       return (
         <>
@@ -17,9 +14,9 @@ export function TransitionState({ variant }: Props) {
         </>
       )
     case "error":
-      return <ErrorState handleRetry={() => {}} />
+      return <ErrorState handleRetry={props.handleRetry} />
     case "empty":
-      return <EmptyState handleAddNew={() => {}} />
+      return <EmptyState handleAddNew={props.handleAddNew} />
     default:
       return null
   }

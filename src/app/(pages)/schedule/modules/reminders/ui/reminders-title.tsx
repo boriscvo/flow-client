@@ -1,8 +1,8 @@
 import { Button, Text } from "@/components/atoms"
 
 type Props = {
-  handleClick: () => void
   shouldShowAddNew?: boolean
+  handleClick: () => void
 }
 
 export function RemindersTitle({ shouldShowAddNew, handleClick }: Props) {

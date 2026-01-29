@@ -10,24 +10,27 @@ export function Reminders() {
     isOpenDetails,
     selectedReminder,
     reminderDeleteExcerpt,
+    fetchRemindersStatus,
     handleOpenDelete,
     handleOpenDetails,
     handleCloseDelete,
     handleCloseDetails,
     handleSelectReminder,
+    handleRefetchReminders,
   } = useReminders()
 
   const {
     reminderData,
     isFormOpen,
     formLabel,
-    status,
+    postReminderStatus,
     handleFormOpen,
     handleFormClose,
     handleSubmitReminder,
   } = useReminderForm({
     initialReminder: selectedReminder,
     handleSelectReminder,
+    handleRefetchReminders,
   })
 
   return (
@@ -38,13 +41,14 @@ export function Reminders() {
       />
       <Container>
         <Content
-          state="success"
+          state={fetchRemindersStatus}
           reminders={reminders}
           handlers={{
             handleOpenDelete,
             handleOpenDetails,
             handleFormOpen,
             handleOpenSnooze: () => {},
+            handleRefetchReminders,
           }}
         />
       </Container>
@@ -68,7 +72,7 @@ export function Reminders() {
         isOpen={isFormOpen}
         title={formLabel}
         form={reminderData}
-        isLoading={status === "pending"}
+        isLoading={postReminderStatus === "pending"}
         handleSubmit={handleSubmitReminder}
         handleClose={handleFormClose}
       />
