@@ -28,6 +28,7 @@ export function Button(props: ButtonProps) {
         <Slot {...props}>
           <UIButton
             variant={props.version === "default" ? "default" : "outline"}
+            className="hover:cursor-pointer"
           >
             {props.label}
           </UIButton>

@@ -17,11 +17,14 @@ export function Details({
 }: Omit<KeyValueDialogProps, "variant">) {
   return (
     <Dialog open={isOpen} onOpenChange={handleClose}>
-      <DialogContent aria-describedby="details-dialog-content">
+      <DialogContent
+        aria-describedby="details-dialog-content"
+        className="w-full h-full max-w-none rounded-none sm:h-auto sm:max-w-lg sm:rounded-lg"
+      >
         <DialogHeader>
           <DialogTitle>{title}</DialogTitle>
         </DialogHeader>
-        <div className="no-scrollbar -mx-4 max-h-[50vh] overflow-y-auto px-4">
+        <div className="no-scrollbar -mx-5 sm:-mx-4 sm:max-h-[50vh] overflow-y-auto px-4">
           {contentSlot}
         </div>
         <DialogFooter>

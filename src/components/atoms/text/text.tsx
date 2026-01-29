@@ -16,7 +16,9 @@ export function Text({ variant, children, className }: Props) {
   switch (variant) {
     case "section-title":
       return (
-        <h2 className={`text-2xl font-bold text-foreground`}>{children}</h2>
+        <h2 className={`text-xl sm:text-2xl font-bold text-foreground`}>
+          {children}
+        </h2>
       )
     case "card-title":
       return (

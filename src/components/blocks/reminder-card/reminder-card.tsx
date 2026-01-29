@@ -6,10 +6,10 @@ import {
   Info,
   Main,
   BadgeLine,
-  TimeIndicator,
   LoadingState,
   Footer,
   DialogLinkContainer,
+  TimeIndicator,
 } from "./ui"
 import { BellDot, Pencil, ReceiptText, Trash } from "lucide-react"
 
@@ -33,13 +33,16 @@ export function ReminderCard(props: ReminderCardProps) {
     <Container>
       <Info>
         <Main>
+          <TimeIndicator scheduledAt={scheduledAt} />
           <Description>
             <Text variant="card-title">{title}</Text>
-            <Text variant="card-message" className="truncate">
+            <Text
+              variant="card-message"
+              className="md:truncate max-md:line-clamp-2"
+            >
               {message}
             </Text>
           </Description>
-          <TimeIndicator scheduledAt={scheduledAt} />
         </Main>
         <Text variant="card-misc">Phone: {phoneNumber}</Text>
         <BadgeLine>

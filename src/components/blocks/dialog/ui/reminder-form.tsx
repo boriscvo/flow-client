@@ -43,14 +43,17 @@ export function ReminderForm({
     <Dialog open={isOpen} onOpenChange={handleClose}>
       <DialogContent
         aria-describedby="reminder-form-dialog-content"
-        className="sm:max-w-xl sm:w-132"
+        className="max-sm:flex max-sm:flex-col sm:max-w-xl sm:w-132 w-full h-full max-w-none rounded-none sm:h-auto sm:rounded-lg"
       >
         <DialogHeader>
           <DialogTitle>{title}</DialogTitle>
         </DialogHeader>
         <Form {...form}>
-          <form onSubmit={handleSubmit}>
-            <div className="no-scrollbar space-y-4 -mx-4 max-h-[50vh] overflow-y-auto px-4 py-4">
+          <form
+            onSubmit={handleSubmit}
+            className="max-sm:flex max-sm:flex-col max-sm:h-full"
+          >
+            <div className="no-scrollbar space-y-4 -mx-4 max-h-[75vh] sm:max-h-[50vh] overflow-y-auto px-4 py-4">
               <FormField
                 control={form.control}
                 name="title"
@@ -90,12 +93,12 @@ export function ReminderForm({
                   </FormItem>
                 )}
               />
-              <div className="flex gap-2 justify-between items-start">
+              <div className="flex max-sm:flex-col gap-2 justify-between items-start">
                 <FormField
                   control={form.control}
                   name="scheduledAtDate"
                   render={({ field }) => (
-                    <FormItem className="sm:min-w-34">
+                    <FormItem className="min-w-40 sm:min-w-34">
                       <FormLabel>Date</FormLabel>
                       <FormControl>
                         <Popover>
@@ -140,7 +143,7 @@ export function ReminderForm({
                   control={form.control}
                   name="scheduledAtTime"
                   render={({ field }) => (
-                    <FormItem>
+                    <FormItem className="max-sm:min-w-40">
                       <FormLabel>Time</FormLabel>
                       <FormControl>
                         <Input type="time" {...field} />
@@ -153,7 +156,7 @@ export function ReminderForm({
                   control={form.control}
                   name="timezone"
                   render={({ field }) => (
-                    <FormItem className="sm:flex-1">
+                    <FormItem className="max-sm:min-w-40 sm:flex-1">
                       <FormLabel>Timezone</FormLabel>
                       <FormControl>
                         <Select
@@ -178,7 +181,7 @@ export function ReminderForm({
                 />
               </div>
             </div>
-            <DialogFooter className="mt-4">
+            <DialogFooter className="max-sm:mt-auto mt-6 pt-2">
               <Button
                 variant="outline"
                 label="Cancel"

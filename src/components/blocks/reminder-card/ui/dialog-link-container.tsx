@@ -3,5 +3,9 @@ type Props = {
 }
 
 export function DialogLinkContainer(props: Props) {
-  return <div className="flex gap-x-6">{props.children}</div>
+  return (
+    <div className="flex max-sm:flex-col max-sm:items-start max-sm:gap-y-1 gap-x-6">
+      {props.children}
+    </div>
+  )
 }

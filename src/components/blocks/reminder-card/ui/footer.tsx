@@ -4,7 +4,7 @@ type Props = {
 
 export function Footer({ children }: Props) {
   return (
-    <div className="flex md:px-6 md:py-2 justify-between border-t border-divider">
+    <div className="flex max-sm:flex-col px-4 sm:px-6 py-2 max-sm:items-start max-sm:gap-y-1 sm:justify-between border-t border-divider">
       {children}
     </div>
   )

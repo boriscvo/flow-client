@@ -3,5 +3,9 @@ type Props = {
 }
 
 export function Main({ children }: Props) {
-  return <div className="flex w-full justify-between">{children}</div>
+  return (
+    <div className="max-sm:flex-col flex-row-reverse flex w-full sm:justify-between">
+      {children}
+    </div>
+  )
 }
