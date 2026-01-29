@@ -12,6 +12,7 @@ export function LoadingState() {
     <Container>
       <Info>
         <Main>
+          <LoadingSkeleton className="mt-1 max-sm:mb-6 w-46 h-5" />
           <Description>
             <LoadingSkeleton className="mt-1 w-20 h-5" />
             <LoadingSkeleton className="mt-1.5 w-50 h-5" />
@@ -20,7 +21,7 @@ export function LoadingState() {
         <LoadingSkeleton className="mt-1 w-46 h-4" />
         <BadgeLine>
           <LoadingSkeleton className="mt-1 w-22 h-4 rounded-full" />
-          <LoadingSkeleton className="mt-1 w-22 h-4 rounded-full mb-1" />
+          <LoadingSkeleton className="mt-1 w-22 h-4 rounded-full mb-1 max-sm:mb-2" />
         </BadgeLine>
       </Info>
       <Footer>
