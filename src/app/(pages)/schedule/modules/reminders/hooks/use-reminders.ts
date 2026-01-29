@@ -1,7 +1,8 @@
-import { getReminders } from "@/api/get-reminders"
-import { ReminderType } from "@/types/api/reminder"
-import { useQuery } from "@tanstack/react-query"
 import { useState } from "react"
+import { ReminderType } from "@/types/api/reminder"
+import { useMutation, useQuery } from "@tanstack/react-query"
+import { deleteReminder, getReminders } from "@/api/reminders"
+import { toast } from "sonner"
 
 export function useReminders() {
   const [reminderId, setReminderId] = useState<string | null>(null)
@@ -25,6 +26,20 @@ export function useReminders() {
     queryFn: getReminders,
   })
 
+  const { mutate } = useMutation({
+    mutationFn: () => deleteReminder(reminderId),
+    onSuccess: () => {
+      toast.success("Reminder deleted successfully")
+      handleRefetchReminders()
+      handleCloseDelete()
+    },
+    onError: (error) => {
+      toast.error(
+        error instanceof Error ? error.message : "Failed to delete reminder",
+      )
+    },
+  })
+
   const handleSelectReminder = (id?: string | null) => {
     const reminder = reminders?.find((reminder) => reminder.id === id) || null
     setSelectedReminder(reminder)
@@ -41,6 +56,10 @@ export function useReminders() {
     setReminderDeleteExcerpt(reminderExcerpt || null)
     setReminderId(id)
     setIsOpenDelete(true)
+  }
+
+  const handleConfirmDelete = () => {
+    mutate()
   }
   const handleCloseDelete = () => {
     setIsOpenDelete(false)
@@ -74,5 +93,6 @@ export function useReminders() {
     handleCloseDetails,
     handleSelectReminder,
     handleRefetchReminders,
+    handleConfirmDelete,
   }
 }

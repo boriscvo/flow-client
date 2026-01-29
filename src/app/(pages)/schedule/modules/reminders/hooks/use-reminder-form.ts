@@ -7,8 +7,8 @@ import { format, formatDate, parse } from "date-fns"
 import { getBrowserTimezone } from "@/utils/helpers/get-browser-timezone"
 import { TIMEZONE_OPTIONS } from "@/utils/const/timezones"
 import { useMutation } from "@tanstack/react-query"
-import { postReminder } from "@/api/post-reminder"
 import { toast } from "sonner"
+import { postReminder } from "@/api/reminders"
 
 type Args = {
   initialReminder?: ReminderType | null

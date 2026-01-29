@@ -17,6 +17,7 @@ export function Reminders() {
     handleCloseDetails,
     handleSelectReminder,
     handleRefetchReminders,
+    handleConfirmDelete,
   } = useReminders()
 
   const {
@@ -64,7 +65,7 @@ export function Reminders() {
         title="Delete Reminder"
         isOpen={isOpenDelete}
         handleClose={handleCloseDelete}
-        handleConfirm={() => {}}
+        handleConfirm={handleConfirmDelete}
         descriptionSlot={<DeleteAlert excerpt={reminderDeleteExcerpt} />}
       />
       <Dialog

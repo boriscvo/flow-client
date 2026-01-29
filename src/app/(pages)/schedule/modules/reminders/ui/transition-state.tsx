@@ -10,7 +10,6 @@ export function TransitionState(props: ReminderTransitionStateProps) {
         <>
           <ReminderCard variant="placeholder" />
           <ReminderCard variant="placeholder" />
-          <ReminderCard variant="placeholder" />
         </>
       )
     case "error":

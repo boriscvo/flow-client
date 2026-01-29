@@ -9,9 +9,11 @@ export type ReminderType = {
   timezone: string
   status: ReminderStatus
   snoozeCount?: number
-  failureReason?: string
+}
+
+export type ReminderDetailsType = ReminderType & {
   createdAt: string
-  updatedAt?: string
+  failureReason?: string
 }
 
 export type ReminderUpdateType = {
