@@ -12,7 +12,7 @@ export function LoadingState() {
     <Container>
       <Info>
         <Main>
-          <LoadingSkeleton className="mt-1 max-sm:mb-6 w-46 h-5" />
+          <LoadingSkeleton className="mt-1 max-sm:mb-6 w-32 h-5" />
           <Description>
             <LoadingSkeleton className="mt-1 w-20 h-5" />
             <LoadingSkeleton className="mt-1.5 w-50 h-5" />
