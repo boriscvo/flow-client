@@ -17,7 +17,10 @@ export function Button(props: ButtonProps) {
           type="button"
           variant={variant}
           className="hover:cursor-pointer min-w-20"
-          onClick={handleClick}
+          onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
+            handleClick()
+            e.preventDefault()
+          }}
         >
           {label}
         </UIButton>

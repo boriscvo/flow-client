@@ -11,6 +11,8 @@ export function Reminders() {
     selectedReminder,
     reminderDeleteExcerpt,
     fetchRemindersStatus,
+    reminderDetails,
+    fetchReminderDetailsStatus,
     handleOpenDelete,
     handleOpenDetails,
     handleCloseDelete,
@@ -18,6 +20,7 @@ export function Reminders() {
     handleSelectReminder,
     handleRefetchReminders,
     handleConfirmDelete,
+    handleRefetchReminderDetails,
   } = useReminders()
 
   const {
@@ -58,7 +61,13 @@ export function Reminders() {
         title="Reminder Details"
         isOpen={isOpenDetails}
         handleClose={handleCloseDetails}
-        contentSlot={<Details reminder={selectedReminder} />}
+        handleRetry={handleRefetchReminderDetails}
+        contentSlot={
+          <Details
+            reminder={reminderDetails}
+            status={fetchReminderDetailsStatus}
+          />
+        }
       />
       <Dialog
         variant="alert"

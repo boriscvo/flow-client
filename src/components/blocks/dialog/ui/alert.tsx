@@ -18,7 +18,7 @@ export function Alert({
 }: Omit<AlertDialogProps, "variant">) {
   return (
     <Dialog open={isOpen} onOpenChange={handleClose}>
-      <DialogContent aria-describedby="alert-dialog-content">
+      <DialogContent aria-describedby={undefined}>
         <DialogHeader>
           <DialogTitle>{title}</DialogTitle>
         </DialogHeader>

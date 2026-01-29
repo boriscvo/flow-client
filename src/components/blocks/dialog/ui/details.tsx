@@ -2,7 +2,6 @@ import {
   Dialog,
   DialogFooter,
   DialogHeader,
-  DialogClose,
   DialogContent,
   DialogTitle,
 } from "@/components/_ui/dialog"
@@ -14,11 +13,12 @@ export function Details({
   title,
   contentSlot,
   handleClose,
+  handleRetry,
 }: Omit<KeyValueDialogProps, "variant">) {
   return (
     <Dialog open={isOpen} onOpenChange={handleClose}>
       <DialogContent
-        aria-describedby="details-dialog-content"
+        aria-describedby={undefined}
         className="w-full h-full max-w-none rounded-none sm:h-auto sm:max-w-lg sm:rounded-lg"
       >
         <DialogHeader>
@@ -28,9 +28,12 @@ export function Details({
           {contentSlot}
         </div>
         <DialogFooter>
-          <DialogClose asChild>
-            <Button variant="outline" handleClick={handleClose} label="Close" />
-          </DialogClose>
+          <Button
+            variant="destructive"
+            handleClick={handleRetry}
+            label="Try Again"
+          />
+          <Button variant="outline" handleClick={handleClose} label="Close" />
         </DialogFooter>
       </DialogContent>
     </Dialog>

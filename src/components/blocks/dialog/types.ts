@@ -10,6 +10,7 @@ export type CommonDialogProps = {
 export type KeyValueDialogProps = CommonDialogProps & {
   variant: "details"
   contentSlot: React.ReactNode
+  handleRetry: () => void
 }
 
 export type AlertDialogProps = CommonDialogProps & {

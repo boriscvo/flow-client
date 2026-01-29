@@ -44,7 +44,7 @@ export function ReminderForm({
   return (
     <Dialog open={isOpen} onOpenChange={handleClose}>
       <DialogContent
-        aria-describedby="reminder-form-dialog-content"
+        aria-describedby={undefined}
         className="max-sm:flex max-sm:flex-col sm:max-w-xl sm:w-132 w-full h-full max-w-none rounded-none sm:h-auto sm:rounded-lg"
       >
         <DialogHeader>

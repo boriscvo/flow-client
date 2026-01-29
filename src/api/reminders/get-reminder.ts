@@ -1,6 +1,9 @@
 import { ReminderType } from "@/types/api/reminder"
 
-export async function getReminder(id: string) {
+export async function getReminder(id: string | null) {
+  if (!id) {
+    throw new Error("Reminder ID is required")
+  }
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/reminders/${id}`,
     {

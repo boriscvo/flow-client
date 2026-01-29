@@ -1,7 +1,7 @@
 import { useState } from "react"
-import { ReminderType } from "@/types/api/reminder"
+import { ReminderDetailsType, ReminderType } from "@/types/api/reminder"
 import { useMutation, useQuery } from "@tanstack/react-query"
-import { deleteReminder, getReminders } from "@/api/reminders"
+import { deleteReminder, getReminder, getReminders } from "@/api/reminders"
 import { toast } from "sonner"
 
 export function useReminders() {
@@ -19,11 +19,21 @@ export function useReminders() {
 
   const {
     data: reminders,
-    refetch,
+    refetch: refetchReminders,
     status: fetchRemindersStatus,
   } = useQuery<ReminderType[]>({
     queryKey: ["reminders"],
     queryFn: getReminders,
+  })
+
+  const {
+    data: reminderDetails,
+    status: fetchReminderDetailsStatus,
+    refetch: refetchReminderDetails,
+  } = useQuery<ReminderDetailsType>({
+    queryKey: ["reminder", reminderId],
+    queryFn: () => getReminder(reminderId),
+    enabled: !!reminderId,
   })
 
   const { mutate } = useMutation({
@@ -67,8 +77,7 @@ export function useReminders() {
   }
 
   const handleOpenDetails = (id: string) => {
-    const reminder = reminders?.find((reminder) => reminder.id === id) || null
-    setSelectedReminder(reminder)
+    setReminderId(id)
     setIsOpenDetails(true)
   }
   const handleCloseDetails = () => {
@@ -77,7 +86,11 @@ export function useReminders() {
   }
 
   const handleRefetchReminders = () => {
-    refetch()
+    refetchReminders()
+  }
+
+  const handleRefetchReminderDetails = () => {
+    refetchReminderDetails()
   }
 
   return {
@@ -87,6 +100,8 @@ export function useReminders() {
     selectedReminder,
     reminderDeleteExcerpt,
     fetchRemindersStatus,
+    reminderDetails,
+    fetchReminderDetailsStatus,
     handleOpenDelete,
     handleOpenDetails,
     handleCloseDelete,
@@ -94,5 +109,6 @@ export function useReminders() {
     handleSelectReminder,
     handleRefetchReminders,
     handleConfirmDelete,
+    handleRefetchReminderDetails,
   }
 }
