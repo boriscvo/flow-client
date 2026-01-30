@@ -60,6 +60,7 @@ export function Reminders() {
         variant="details"
         title="Reminder Details"
         isOpen={isOpenDetails}
+        isError={fetchReminderDetailsStatus === "error"}
         handleClose={handleCloseDetails}
         handleRetry={handleRefetchReminderDetails}
         contentSlot={

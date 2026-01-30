@@ -12,6 +12,7 @@ export function Details({
   isOpen,
   title,
   contentSlot,
+  isError,
   handleClose,
   handleRetry,
 }: Omit<KeyValueDialogProps, "variant">) {
@@ -28,11 +29,13 @@ export function Details({
           {contentSlot}
         </div>
         <DialogFooter>
-          <Button
-            variant="destructive"
-            handleClick={handleRetry}
-            label="Try Again"
-          />
+          {isError && (
+            <Button
+              variant="destructive"
+              handleClick={handleRetry}
+              label="Try Again"
+            />
+          )}
           <Button variant="outline" handleClick={handleClose} label="Close" />
         </DialogFooter>
       </DialogContent>
