@@ -25,7 +25,10 @@ export function Content({ state, reminders, handlers }: Props) {
 
   if (reminders.length === 0) {
     return (
-      <TransitionState variant="empty" handleAddNew={handlers.handleFormOpen} />
+      <TransitionState
+        variant="empty"
+        handleAddNew={handlers.handleNewFormOpen}
+      />
     )
   }
 

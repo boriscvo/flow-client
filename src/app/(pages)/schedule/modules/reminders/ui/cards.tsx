@@ -12,7 +12,7 @@ export function Cards({ reminders, handlers }: Props) {
   const {
     handleOpenDelete,
     handleOpenDetails,
-    handleFormOpen,
+    handleEditFormOpen,
     handleOpenSnooze,
   } = handlers
   return reminders.map((reminder) => {
@@ -29,7 +29,7 @@ export function Cards({ reminders, handlers }: Props) {
         reminder={reminder}
         handleOpenDelete={handleOpenDelete}
         handleOpenDetails={handleOpenDetails}
-        handleOpenEdit={handleFormOpen}
+        handleOpenEdit={handleEditFormOpen}
         handleOpenSnooze={handleOpenSnooze}
       />
     )

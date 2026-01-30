@@ -55,7 +55,8 @@ export function Reminders() {
           handlers={{
             handleOpenDelete,
             handleOpenDetails,
-            handleFormOpen: handleEditFormOpen,
+            handleEditFormOpen,
+            handleNewFormOpen,
             handleOpenSnooze: () => {},
             handleRefetchReminders,
           }}
