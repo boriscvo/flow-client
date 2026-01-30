@@ -19,12 +19,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-        <body className={`${inter.className} antialiased bg-background`}>
+      <body className={`${inter.className} antialiased bg-background`}>
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <TanstackProvider>{children}</TanstackProvider>
           <Toaster position="top-right" richColors />
-        </body>
-      </ThemeProvider>
+        </ThemeProvider>
+      </body>
     </html>
   )
 }
