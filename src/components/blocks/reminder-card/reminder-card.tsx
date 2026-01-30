@@ -20,6 +20,7 @@ export function ReminderCard(props: ReminderCardProps) {
 
   const {
     reminder,
+    isPast = false,
     handleOpenDelete,
     handleOpenDetails,
     handleOpenEdit,
@@ -48,6 +49,7 @@ export function ReminderCard(props: ReminderCardProps) {
         <BadgeLine>
           <Badge variant="card-status" state={status} label={status} />
           <Badge variant="info" label={timezone} />
+          {isPast && <Badge variant="past" />}
         </BadgeLine>
       </Info>
       <Footer>
@@ -65,6 +67,7 @@ export function ReminderCard(props: ReminderCardProps) {
             variant="inline-card"
             label="Edit"
             state="default"
+            isDisabled={isPast}
             iconSlot={<Pencil strokeWidth={2.5} className="text-foreground" />}
             handleClick={() => handleOpenEdit(id)}
           />
@@ -89,6 +92,7 @@ export function ReminderCard(props: ReminderCardProps) {
           iconSlot={
             <BellDot size={20} strokeWidth={2.5} className="text-foreground" />
           }
+          isDisabled={isPast}
           handleClick={() => handleOpenSnooze(id)}
         />
       </Footer>

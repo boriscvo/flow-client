@@ -24,7 +24,7 @@ const badgeVariants = cva(
         "card-warning":
           "bg-card-warning-bg text-card-warning-text border-card-warning-text",
         "card-error":
-          "bg-card-error-bg text-card-error-text border-card-error-text",
+          "bg-card-error-bg/60 text-card-error-text border-card-error-text",
         "card-info":
           "bg-card-info-bg text-card-info-text border-card-info-text",
         warning: "bg-warning text-warning-foreground [a&]:hover:bg-warning/90",

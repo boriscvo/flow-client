@@ -15,6 +15,7 @@ export type ReminderCardPlaceholderType = {
 export type ReminderCardFullType = {
   variant: "component"
   reminder: ReminderCardType
+  isPast?: boolean
   handleOpenDelete: (id: string) => void
   handleOpenSnooze: (id: string) => void
   handleOpenEdit: (id: string) => void

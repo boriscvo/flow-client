@@ -1,5 +1,5 @@
 import { BadgeProps } from "./types"
-import { CardStatus, Info } from "./variants"
+import { CardStatus, Info, Past } from "./variants"
 
 export function Badge(props: BadgeProps) {
   switch (props.variant) {
@@ -10,6 +10,9 @@ export function Badge(props: BadgeProps) {
     case "info": {
       const { label } = props
       return <Info label={label} />
+    }
+    case "past": {
+      return <Past />
     }
   }
 }

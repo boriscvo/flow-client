@@ -13,6 +13,7 @@ export type InlineCardButtonProps = CommonButtonProps & {
   state: "default" | "loading" | "disabled" | "done" | "error"
   iconSlot: React.ReactNode
   isDestructive?: boolean
+  isDisabled?: boolean
 }
 
 export type FormTriggerButtonProps = {

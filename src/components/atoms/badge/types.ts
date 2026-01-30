@@ -13,4 +13,8 @@ export type InfoBadgeProps = CommonBadgeProps & {
   variant: "info"
 }
 
-export type BadgeProps = CardStatusBadgeProps | InfoBadgeProps
+export type PastBadgeProps = {
+  variant: "past"
+}
+
+export type BadgeProps = CardStatusBadgeProps | InfoBadgeProps | PastBadgeProps
