@@ -1,8 +1,9 @@
 import type { Metadata } from "next"
 import { Inter } from "next/font/google"
 import TanstackProvider from "@/lib/tanstack-provider"
-import "./globals.css"
 import { Toaster } from "sonner"
+import { ThemeProvider } from "next-themes"
+import "./globals.css"
 
 const inter = Inter({ subsets: ["latin"] })
 
@@ -17,11 +18,13 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en">
-      <body className={`${inter.className} antialiased bg-background`}>
-        <TanstackProvider>{children}</TanstackProvider>
-        <Toaster position="top-right" richColors />
-      </body>
+    <html lang="en" suppressHydrationWarning>
+      <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+        <body className={`${inter.className} antialiased bg-background`}>
+          <TanstackProvider>{children}</TanstackProvider>
+          <Toaster position="top-right" richColors />
+        </body>
+      </ThemeProvider>
     </html>
   )
 }

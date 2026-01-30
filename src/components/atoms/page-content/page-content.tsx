@@ -8,7 +8,7 @@ export function PageContent({
     case "standard":
     default:
       return (
-        <div className="flex flex-col mx-auto px-4 py-7 sm:px-5 w-full sm:max-w-250 h-full min-h-screen ">
+        <div className="flex flex-col mx-auto px-4 pb-7 sm:px-5 w-full sm:max-w-250 h-full min-h-screen ">
           {children}
         </div>
       )
