@@ -9,6 +9,8 @@ type Props = {
     | "key-label"
     | "key-value"
     | "icon-label"
+    | "stats-label"
+    | "stats-value"
   children: React.ReactNode
   className?: string
 }
@@ -55,6 +57,18 @@ export function Text({ variant, children, className }: Props) {
       return (
         <span
           className={`text-sm text-foreground font-medium ${className || ""}`}
+        >
+          {children}
+        </span>
+      )
+    case "stats-label":
+      return (
+        <span className={`text-sm text-muted font-medium`}>{children}</span>
+      )
+    case "stats-value":
+      return (
+        <span
+          className={`text-sm text-foreground font-semibold ${className || ""}`}
         >
           {children}
         </span>

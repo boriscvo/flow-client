@@ -24,3 +24,10 @@ export type ReminderUpdateType = {
   scheduledAtTime: string
   timezone: string
 }
+
+export type ReminderStatsType = {
+  totalReminders: number
+  todayReminders: number
+  failedReminders: number
+  nextReminderAt: string | null
+}

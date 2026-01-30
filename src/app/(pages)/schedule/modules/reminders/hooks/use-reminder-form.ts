@@ -6,7 +6,7 @@ import { useEffect, useMemo, useState } from "react"
 import { format, formatDate, parse } from "date-fns"
 import { getBrowserTimezone } from "@/utils/helpers/get-browser-timezone"
 import { TIMEZONE_OPTIONS } from "@/utils/const/timezones"
-import { useMutation } from "@tanstack/react-query"
+import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { toast } from "sonner"
 import { postReminder } from "@/api/reminders"
 
@@ -48,6 +48,7 @@ export function useReminderForm({
   handleSelectReminder,
   handleRefetchReminders,
 }: Args) {
+  const queryClient = useQueryClient()
   const [isFormOpen, setIsFormOpen] = useState(false)
 
   const handleFormOpen = (id?: string | null) => {
@@ -76,6 +77,7 @@ export function useReminderForm({
           ? "Reminder updated successfully"
           : "Reminder saved successfully",
       )
+      queryClient.invalidateQueries({ queryKey: ["reminders-stats"] })
       handleRefetchReminders()
       handleFormClose()
     },

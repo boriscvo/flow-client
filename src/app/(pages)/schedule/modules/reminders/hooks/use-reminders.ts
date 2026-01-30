@@ -1,10 +1,12 @@
 import { useState } from "react"
+import { useQueryClient } from "@tanstack/react-query"
 import { ReminderDetailsType, ReminderType } from "@/types/api/reminder"
 import { useMutation, useQuery } from "@tanstack/react-query"
 import { deleteReminder, getReminder, getReminders } from "@/api/reminders"
 import { toast } from "sonner"
 
 export function useReminders() {
+  const queryClient = useQueryClient()
   const [reminderId, setReminderId] = useState<string | null>(null)
   const [selectedReminder, setSelectedReminder] = useState<ReminderType | null>(
     null,
@@ -24,6 +26,7 @@ export function useReminders() {
   } = useQuery<ReminderType[]>({
     queryKey: ["reminders"],
     queryFn: getReminders,
+    refetchOnWindowFocus: false,
   })
 
   const {
@@ -34,12 +37,14 @@ export function useReminders() {
     queryKey: ["reminder", reminderId],
     queryFn: () => getReminder(reminderId),
     enabled: !!reminderId,
+    refetchOnWindowFocus: false,
   })
 
   const { mutate } = useMutation({
     mutationFn: () => deleteReminder(reminderId),
     onSuccess: () => {
       toast.success("Reminder deleted successfully")
+      queryClient.invalidateQueries({ queryKey: ["reminders-stats"] })
       handleRefetchReminders()
       handleCloseDelete()
     },
