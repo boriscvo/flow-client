@@ -67,7 +67,7 @@ export function useReminders() {
       setSnoozeId(variables)
     },
     onSuccess: () => {
-      toast.success("Reminder snoozed successfully")
+      toast.success("Reminder delayed for 5 minutes")
       queryClient.invalidateQueries({ queryKey: ["reminders-stats"] })
       handleRefetchReminders()
       handleCloseDelete()
