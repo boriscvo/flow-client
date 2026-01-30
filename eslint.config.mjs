@@ -5,9 +5,25 @@ import nextTs from "eslint-config-next/typescript";
 const eslintConfig = defineConfig([
   ...nextVitals,
   ...nextTs,
-  // Override default ignores of eslint-config-next.
+
+  {
+    files: ["src/app/**/*.{ts,tsx,js,jsx}"],
+    rules: {
+      "no-restricted-imports": [
+        "error",
+        {
+          patterns: [
+            {
+              group: ["**/_ui/*"],
+              message: "Do not import directly from _ui inside app/. Use atoms and blocks instead.",
+            },
+          ],
+        },
+      ],
+    },
+  },
+
   globalIgnores([
-    // Default ignores of eslint-config-next:
     ".next/**",
     "out/**",
     "build/**",
