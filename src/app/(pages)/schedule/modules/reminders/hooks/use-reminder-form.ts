@@ -2,13 +2,13 @@ import z from "zod"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { ReminderType } from "@/types/api/reminder"
-import { useEffect, useMemo, useState } from "react"
+import { useEffect, useState } from "react"
 import { format, formatDate, parse } from "date-fns"
 import { getBrowserTimezone } from "@/utils/helpers/get-browser-timezone"
 import { TIMEZONE_OPTIONS } from "@/utils/const/timezones"
 import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { toast } from "sonner"
-import { postReminder } from "@/api/reminders"
+import { postReminder, putReminder } from "@/api/reminders"
 
 type Args = {
   initialReminder?: ReminderType | null
@@ -49,17 +49,23 @@ export function useReminderForm({
   handleRefetchReminders,
 }: Args) {
   const queryClient = useQueryClient()
-  const [isFormOpen, setIsFormOpen] = useState(false)
+  const [isNewFormOpen, setIsNewFormOpen] = useState(false)
+  const [isEditFormOpen, setIsEditFormOpen] = useState(false)
 
-  const handleFormOpen = (id?: string | null) => {
+  const handleEditFormOpen = (id?: string | null) => {
     if (id) {
       handleSelectReminder(id)
     }
-    setIsFormOpen(true)
+    setIsEditFormOpen(true)
+  }
+
+  const handleNewFormOpen = () => {
+    setIsNewFormOpen(true)
   }
 
   const handleFormClose = () => {
-    setIsFormOpen(false)
+    setIsNewFormOpen(false)
+    setIsEditFormOpen(false)
     handleSelectReminder(null)
     reminderData.reset()
   }
@@ -69,14 +75,26 @@ export function useReminderForm({
     defaultValues: DefaultFormValues,
   })
 
-  const { mutate, status: postReminderStatus } = useMutation({
+  const { mutate: updateReminder, status: putReminderStatus } = useMutation({
+    mutationFn: (values: ReminderFormValues) =>
+      putReminder(values, initialReminder?.id ?? null),
+    onSuccess: () => {
+      toast.success("Reminder updated successfully")
+      queryClient.invalidateQueries({ queryKey: ["reminders-stats"] })
+      handleRefetchReminders()
+      handleFormClose()
+    },
+    onError: (error) => {
+      toast.error(
+        error instanceof Error ? error.message : "Failed to update reminder",
+      )
+    },
+  })
+
+  const { mutate: createReminder, status: postReminderStatus } = useMutation({
     mutationFn: postReminder,
     onSuccess: () => {
-      toast.success(
-        formVariant === "edit"
-          ? "Reminder updated successfully"
-          : "Reminder saved successfully",
-      )
+      toast.success("Reminder saved successfully")
       queryClient.invalidateQueries({ queryKey: ["reminders-stats"] })
       handleRefetchReminders()
       handleFormClose()
@@ -88,12 +106,23 @@ export function useReminderForm({
     },
   })
 
-  const handleSubmitReminder = reminderData.handleSubmit((values) => {
+  const handleCreateReminder = reminderData.handleSubmit((values) => {
     const isoDate = format(
       parse(values.scheduledAtDate, "M/d/yyyy", new Date()),
       "yyyy-MM-dd",
     )
-    mutate({
+    createReminder({
+      ...values,
+      scheduledAtDate: isoDate,
+    })
+  })
+
+  const handleUpdateReminder = reminderData.handleSubmit((values) => {
+    const isoDate = format(
+      parse(values.scheduledAtDate, "M/d/yyyy", new Date()),
+      "yyyy-MM-dd",
+    )
+    updateReminder({
       ...values,
       scheduledAtDate: isoDate,
     })
@@ -118,22 +147,16 @@ export function useReminderForm({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [initialReminder])
 
-  const formVariant = useMemo(() => {
-    return initialReminder ? "edit" : "create"
-  }, [initialReminder])
-
-  const formLabel = useMemo(() => {
-    return initialReminder ? "Edit Reminder" : "Create Reminder"
-  }, [initialReminder])
-
   return {
     reminderData,
-    isFormOpen,
-    formVariant,
-    formLabel,
+    isEditFormOpen,
+    isNewFormOpen,
     postReminderStatus,
-    handleFormOpen,
+    putReminderStatus,
+    handleNewFormOpen,
+    handleEditFormOpen,
     handleFormClose,
-    handleSubmitReminder,
+    handleCreateReminder,
+    handleUpdateReminder,
   }
 }

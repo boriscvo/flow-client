@@ -25,12 +25,15 @@ export function Reminders() {
 
   const {
     reminderData,
-    isFormOpen,
-    formLabel,
+    isEditFormOpen,
+    isNewFormOpen,
     postReminderStatus,
-    handleFormOpen,
+    putReminderStatus,
+    handleNewFormOpen,
+    handleEditFormOpen,
     handleFormClose,
-    handleSubmitReminder,
+    handleCreateReminder,
+    handleUpdateReminder,
   } = useReminderForm({
     initialReminder: selectedReminder,
     handleSelectReminder,
@@ -43,7 +46,7 @@ export function Reminders() {
         shouldShowAddNew={
           reminders.length > 0 && fetchRemindersStatus === "success"
         }
-        handleClick={handleFormOpen}
+        handleClick={handleNewFormOpen}
       />
       <Container>
         <Content
@@ -52,7 +55,7 @@ export function Reminders() {
           handlers={{
             handleOpenDelete,
             handleOpenDetails,
-            handleFormOpen,
+            handleFormOpen: handleEditFormOpen,
             handleOpenSnooze: () => {},
             handleRefetchReminders,
           }}
@@ -82,11 +85,20 @@ export function Reminders() {
       />
       <Dialog
         variant="reminder-form"
-        isOpen={isFormOpen}
-        title={formLabel}
+        isOpen={isNewFormOpen}
+        title={"Create Reminder"}
         form={reminderData}
         isLoading={postReminderStatus === "pending"}
-        handleSubmit={handleSubmitReminder}
+        handleSubmit={handleCreateReminder}
+        handleClose={handleFormClose}
+      />
+      <Dialog
+        variant="reminder-form"
+        isOpen={isEditFormOpen}
+        title={"Edit Reminder"}
+        form={reminderData}
+        isLoading={putReminderStatus === "pending"}
+        handleSubmit={handleUpdateReminder}
         handleClose={handleFormClose}
       />
     </>
