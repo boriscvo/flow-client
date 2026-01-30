@@ -170,7 +170,7 @@ export function ReminderForm({
                           <SelectTrigger className="w-full">
                             <SelectValue placeholder="Select timezone" />
                           </SelectTrigger>
-                          <SelectContent className="sm:bg-white">
+                          <SelectContent className="sm:bg-surface">
                             {TIMEZONE_OPTIONS.map((tz) => (
                               <SelectItem key={tz.value} value={tz.value}>
                                 {tz.label}
