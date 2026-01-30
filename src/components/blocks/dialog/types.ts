@@ -17,6 +17,7 @@ export type KeyValueDialogProps = CommonDialogProps & {
 export type AlertDialogProps = CommonDialogProps & {
   variant: "alert"
   descriptionSlot: React.ReactNode
+  isLoading: boolean
   handleConfirm: () => void
 }
 

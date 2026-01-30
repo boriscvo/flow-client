@@ -13,6 +13,9 @@ export function Reminders() {
     fetchRemindersStatus,
     reminderDetails,
     fetchReminderDetailsStatus,
+    postSnoozeStatus,
+    deleteReminderStatus,
+    snoozeId,
     handleOpenDelete,
     handleOpenDetails,
     handleCloseDelete,
@@ -20,6 +23,7 @@ export function Reminders() {
     handleSelectReminder,
     handleRefetchReminders,
     handleConfirmDelete,
+    handleSnooze,
     handleRefetchReminderDetails,
   } = useReminders()
 
@@ -51,13 +55,15 @@ export function Reminders() {
       <Container>
         <Content
           state={fetchRemindersStatus}
+          snoozeId={snoozeId}
+          isSnoozeLoading={postSnoozeStatus === "pending"}
           reminders={reminders}
           handlers={{
             handleOpenDelete,
             handleOpenDetails,
             handleEditFormOpen,
             handleNewFormOpen,
-            handleOpenSnooze: () => {},
+            handleSnooze,
             handleRefetchReminders,
           }}
         />
@@ -80,6 +86,7 @@ export function Reminders() {
         variant="alert"
         title="Delete Reminder"
         isOpen={isOpenDelete}
+        isLoading={deleteReminderStatus === "pending"}
         handleClose={handleCloseDelete}
         handleConfirm={handleConfirmDelete}
         descriptionSlot={<DeleteAlert excerpt={reminderDeleteExcerpt} />}

@@ -20,15 +20,24 @@ export function ReminderCard(props: ReminderCardProps) {
 
   const {
     reminder,
+    isSnoozeLoading = false,
     isPast = false,
     handleOpenDelete,
     handleOpenDetails,
     handleOpenEdit,
-    handleOpenSnooze,
+    handleSnooze,
   } = props
 
-  const { id, title, message, scheduledAt, timezone, phoneNumber, status } =
-    reminder
+  const {
+    id,
+    title,
+    message,
+    scheduledAt,
+    timezone,
+    phoneNumber,
+    status,
+    snoozeCount,
+  } = reminder
 
   return (
     <Container>
@@ -50,6 +59,9 @@ export function ReminderCard(props: ReminderCardProps) {
           <Badge variant="card-status" state={status} label={status} />
           <Badge variant="info" label={timezone} />
           {isPast && <Badge variant="past" />}
+          {snoozeCount ? (
+            <Badge variant="delayed" label={`Snoozed x ${snoozeCount}`} />
+          ) : null}
         </BadgeLine>
       </Info>
       <Footer>
@@ -90,10 +102,14 @@ export function ReminderCard(props: ReminderCardProps) {
           label="Snooze"
           state="default"
           iconSlot={
-            <BellDot size={20} strokeWidth={2.5} className="text-foreground" />
+            <BellDot
+              size={20}
+              strokeWidth={2.5}
+              className={`text-foreground ${isSnoozeLoading ? "pointer-events-none opacity-60" : ""}`}
+            />
           }
           isDisabled={isPast}
-          handleClick={() => handleOpenSnooze(id)}
+          handleClick={() => handleSnooze(id)}
         />
       </Footer>
     </Container>

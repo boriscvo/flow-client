@@ -27,6 +27,9 @@
 
   --color-card-info-bg: var(--card-info-bg);
   --color-card-info-text: var(--card-info-text);
+
+  --color-card-delay-bg: var(--card-delay-bg);
+  --color-card-delay-text: var(--card-delay-text);
 }
 
 :root {
@@ -66,6 +69,9 @@
 
   --card-info-bg: oklch(0.92 0.06 240);
   --card-info-text: oklch(0.45 0.12 240);
+
+  --card-delay-bg: oklch(0.92 0.12 65);
+  --card-delay-text: oklch(0.45 0.18 65);
 }
 
 .dark {
@@ -98,6 +104,9 @@
 
   --card-info-bg: oklch(0.35 0.08 240);
   --card-info-text: oklch(0.78 0.12 240);
+
+  --card-delay-bg: oklch(0.92 0.12 65);
+  --card-delay-text: oklch(0.45 0.18 65);
 }
 
 @layer base {

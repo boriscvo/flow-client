@@ -5,15 +5,22 @@ import { differenceInSeconds } from "date-fns"
 
 type Props = {
   reminders: ReminderType[]
+  snoozeId: string | null
+  isSnoozeLoading?: boolean
   handlers: ReminderHandlers
 }
 
-export function Cards({ reminders, handlers }: Props) {
+export function Cards({
+  reminders,
+  snoozeId,
+  isSnoozeLoading,
+  handlers,
+}: Props) {
   const {
     handleOpenDelete,
     handleOpenDetails,
     handleEditFormOpen,
-    handleOpenSnooze,
+    handleSnooze,
   } = handlers
   return reminders.map((reminder) => {
     const { scheduledAt } = reminder
@@ -25,12 +32,13 @@ export function Cards({ reminders, handlers }: Props) {
       <ReminderCard
         variant="component"
         isPast={diffSeconds <= 0}
+        isSnoozeLoading={isSnoozeLoading && snoozeId === reminder.id}
         key={reminder.id}
         reminder={reminder}
         handleOpenDelete={handleOpenDelete}
         handleOpenDetails={handleOpenDetails}
         handleOpenEdit={handleEditFormOpen}
-        handleOpenSnooze={handleOpenSnooze}
+        handleSnooze={handleSnooze}
       />
     )
   })

@@ -19,6 +19,7 @@ const badgeVariants = cva(
         ghost: "[a&]:hover:bg-accent [a&]:hover:text-accent-foreground",
         link: "text-primary underline-offset-4 [a&]:hover:underline",
         success: "bg-success text-success-foreground [a&]:hover:bg-success/90",
+        delayed: "bg-card-delay-bg text-card-delay-text border-card-delay-text",
         "card-success":
           "bg-card-success-bg text-card-success-text border-card-success-text",
         "card-warning":

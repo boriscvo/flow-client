@@ -10,7 +10,7 @@ export type CardStatusBadgeProps = CommonBadgeProps & {
 }
 
 export type InfoBadgeProps = CommonBadgeProps & {
-  variant: "info"
+  variant: "info" | "delayed"
 }
 
 export type PastBadgeProps = {

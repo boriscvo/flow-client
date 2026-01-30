@@ -1,5 +1,5 @@
 export type CommonButtonProps = {
-  label: string
+  label: string | React.ReactNode
   handleClick: () => void
 }
 

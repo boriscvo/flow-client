@@ -5,6 +5,7 @@ export type ReminderCardType = {
   scheduledAt: string
   timezone: string
   phoneNumber: string
+  snoozeCount?: number
   status: "scheduled" | "completed" | "failed"
 }
 
@@ -16,8 +17,10 @@ export type ReminderCardFullType = {
   variant: "component"
   reminder: ReminderCardType
   isPast?: boolean
+  isSnoozeLoading?: boolean
+  snoozeCount?: number
   handleOpenDelete: (id: string) => void
-  handleOpenSnooze: (id: string) => void
+  handleSnooze: (id: string) => void
   handleOpenEdit: (id: string) => void
   handleOpenDetails: (id: string) => void
 }

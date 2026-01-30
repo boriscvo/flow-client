@@ -8,11 +8,13 @@ import {
 } from "@/components/_ui/dialog"
 import { AlertDialogProps } from "../types"
 import { Button } from "../../../atoms/button/button"
+import { Loader2 } from "lucide-react"
 
 export function Alert({
   isOpen,
   title,
   descriptionSlot,
+  isLoading,
   handleConfirm,
   handleClose,
 }: Omit<AlertDialogProps, "variant">) {
@@ -34,7 +36,7 @@ export function Alert({
           <Button
             variant="destructive"
             handleClick={handleConfirm}
-            label={"Delete"}
+            label={isLoading ? <Loader2 className="animate-spin" /> : "Delete"}
           />
         </DialogFooter>
       </DialogContent>

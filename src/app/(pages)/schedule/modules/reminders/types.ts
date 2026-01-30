@@ -1,6 +1,6 @@
 export type ReminderHandlers = {
   handleOpenDelete: (id: string) => void
-  handleOpenSnooze: (id: string) => void
+  handleSnooze: (id: string) => void
   handleNewFormOpen: () => void
   handleEditFormOpen: (id: string) => void
   handleOpenDetails: (id: string) => void

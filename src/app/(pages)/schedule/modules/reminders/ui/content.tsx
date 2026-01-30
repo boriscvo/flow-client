@@ -6,10 +6,18 @@ import { TransitionState } from "./transition-state"
 type Props = {
   state: "pending" | "success" | "error"
   reminders: ReminderType[]
+  snoozeId: string | null
+  isSnoozeLoading?: boolean
   handlers: ReminderHandlers
 }
 
-export function Content({ state, reminders, handlers }: Props) {
+export function Content({
+  state,
+  reminders,
+  snoozeId,
+  isSnoozeLoading,
+  handlers,
+}: Props) {
   if (state === "pending") {
     return <TransitionState variant="loading" />
   }
@@ -32,5 +40,12 @@ export function Content({ state, reminders, handlers }: Props) {
     )
   }
 
-  return <Cards reminders={reminders} handlers={handlers} />
+  return (
+    <Cards
+      reminders={reminders}
+      isSnoozeLoading={isSnoozeLoading}
+      snoozeId={snoozeId}
+      handlers={handlers}
+    />
+  )
 }

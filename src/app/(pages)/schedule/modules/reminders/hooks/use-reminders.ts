@@ -2,7 +2,12 @@ import { useState } from "react"
 import { useQueryClient } from "@tanstack/react-query"
 import { ReminderDetailsType, ReminderType } from "@/types/api/reminder"
 import { useMutation, useQuery } from "@tanstack/react-query"
-import { deleteReminder, getReminder, getReminders } from "@/api/reminders"
+import {
+  deleteReminder,
+  getReminder,
+  getReminders,
+  postSnooze,
+} from "@/api/reminders"
 import { toast } from "sonner"
 
 export function useReminders() {
@@ -18,6 +23,7 @@ export function useReminders() {
 
   const [isOpenDelete, setIsOpenDelete] = useState(false)
   const [isOpenDetails, setIsOpenDetails] = useState(false)
+  const [snoozeId, setSnoozeId] = useState<string | null>(null)
 
   const {
     data: reminders,
@@ -40,7 +46,7 @@ export function useReminders() {
     refetchOnWindowFocus: false,
   })
 
-  const { mutate } = useMutation({
+  const { mutate: mutateDelete, status: deleteReminderStatus } = useMutation({
     mutationFn: () => deleteReminder(reminderId),
     onSuccess: () => {
       toast.success("Reminder deleted successfully")
@@ -52,6 +58,26 @@ export function useReminders() {
       toast.error(
         error instanceof Error ? error.message : "Failed to delete reminder",
       )
+    },
+  })
+
+  const { mutate: mutateSnooze, status: postSnoozeStatus } = useMutation({
+    mutationFn: (id: string | null) => postSnooze(id),
+    onMutate(variables) {
+      setSnoozeId(variables)
+    },
+    onSuccess: () => {
+      toast.success("Reminder snoozed successfully")
+      queryClient.invalidateQueries({ queryKey: ["reminders-stats"] })
+      handleRefetchReminders()
+      handleCloseDelete()
+      setSnoozeId(null)
+    },
+    onError: (error) => {
+      toast.error(
+        error instanceof Error ? error.message : "Failed to snooze reminder",
+      )
+      setSnoozeId(null)
     },
   })
 
@@ -74,7 +100,7 @@ export function useReminders() {
   }
 
   const handleConfirmDelete = () => {
-    mutate()
+    mutateDelete()
   }
   const handleCloseDelete = () => {
     setIsOpenDelete(false)
@@ -98,6 +124,10 @@ export function useReminders() {
     refetchReminderDetails()
   }
 
+  const handleSnooze = (id: string) => {
+    mutateSnooze(id)
+  }
+
   return {
     reminders: reminders || [],
     isOpenDelete,
@@ -107,6 +137,9 @@ export function useReminders() {
     fetchRemindersStatus,
     reminderDetails,
     fetchReminderDetailsStatus,
+    postSnoozeStatus,
+    deleteReminderStatus,
+    snoozeId,
     handleOpenDelete,
     handleOpenDetails,
     handleCloseDelete,
@@ -114,6 +147,7 @@ export function useReminders() {
     handleSelectReminder,
     handleRefetchReminders,
     handleConfirmDelete,
+    handleSnooze,
     handleRefetchReminderDetails,
   }
 }

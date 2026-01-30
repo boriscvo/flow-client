@@ -1,8 +1,10 @@
 import { getRemindersStats } from "@/api/reminders"
 import { keepPreviousData, useQuery } from "@tanstack/react-query"
 import { differenceInSeconds } from "date-fns"
+import { useNow } from "./use-now"
 
 export function useStats() {
+  const { now } = useNow()
   const { data: reminderStats, status: reminderStatsStatus } = useQuery({
     queryKey: ["reminders-stats"],
     queryFn: getRemindersStats,
@@ -14,7 +16,6 @@ export function useStats() {
   const formatTimeUntil = (nextReminderAt?: string): string => {
     if (!nextReminderAt) return "-"
     const target = new Date(nextReminderAt)
-    const now = new Date()
 
     const diffSeconds = differenceInSeconds(target, now)
 
