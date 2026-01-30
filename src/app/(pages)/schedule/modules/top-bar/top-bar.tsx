@@ -1,9 +1,10 @@
 import { Switch } from "@/components/atoms"
-import { Container } from "./ui"
+import { Container, Timezone } from "./ui"
 
 export function TopBar() {
   return (
     <Container>
+      <Timezone /> |
       <Switch variant="theme" />
     </Container>
   )

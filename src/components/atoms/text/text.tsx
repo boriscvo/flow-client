@@ -8,6 +8,7 @@ type Props = {
     | "card-misc"
     | "key-label"
     | "key-value"
+    | "icon-label"
   children: React.ReactNode
   className?: string
 }
@@ -49,6 +50,14 @@ export function Text({ variant, children, className }: Props) {
     case "key-value":
       return (
         <span className={`text-foreground ${className || ""}`}>{children}</span>
+      )
+    case "icon-label":
+      return (
+        <span
+          className={`text-sm text-foreground font-medium ${className || ""}`}
+        >
+          {children}
+        </span>
       )
   }
 }
