@@ -40,7 +40,9 @@ export function Reminders() {
   return (
     <>
       <RemindersTitle
-        shouldShowAddNew={reminders.length > 0}
+        shouldShowAddNew={
+          reminders.length > 0 && fetchRemindersStatus === "success"
+        }
         handleClick={handleFormOpen}
       />
       <Container>
