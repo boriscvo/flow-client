@@ -27,8 +27,15 @@ export type AddNewButtonProps = CommonButtonProps & {
   variant: "add-new"
 }
 
+export type ToggleIconButtonProps = Omit<CommonButtonProps, "label"> & {
+  variant: "toggle-icon"
+  className?: string
+  icon: React.ReactNode
+}
+
 export type ButtonProps =
   | InlineCardButtonProps
   | MainButtonProps
   | AddNewButtonProps
   | FormTriggerButtonProps
+  | ToggleIconButtonProps

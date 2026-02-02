@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useMemo, useState } from "react"
 import { useQueryClient } from "@tanstack/react-query"
 import { ReminderDetailsType, ReminderType } from "@/types/api/reminder"
 import { useMutation, useQuery } from "@tanstack/react-query"
@@ -24,6 +24,16 @@ export function useReminders() {
   const [isOpenDelete, setIsOpenDelete] = useState(false)
   const [isOpenDetails, setIsOpenDetails] = useState(false)
   const [snoozeId, setSnoozeId] = useState<string | null>(null)
+  const [isSortAsc, setIsSortAsc] = useState(true)
+  const [shouldHideCompleted, setShouldHideCompleted] = useState(false)
+
+  const handleSortToggle = () => {
+    setIsSortAsc(!isSortAsc)
+  }
+
+  const handleHideCompletedToggle = () => {
+    setShouldHideCompleted(!shouldHideCompleted)
+  }
 
   const {
     data: reminders,
@@ -128,8 +138,36 @@ export function useReminders() {
     mutateSnooze(id)
   }
 
+  const sortedReminders = useMemo(() => {
+    const filteredReminders = shouldHideCompleted
+      ? reminders?.filter((reminder) => reminder.status === "scheduled")
+      : reminders
+
+    if (isSortAsc) {
+      return (
+        filteredReminders
+          ?.slice()
+          .sort(
+            (a, b) =>
+              new Date(b.scheduledAt).getTime() -
+              new Date(a.scheduledAt).getTime(),
+          ) || []
+      )
+    } else {
+      return (
+        filteredReminders
+          ?.slice()
+          .sort(
+            (a, b) =>
+              new Date(a.scheduledAt).getTime() -
+              new Date(b.scheduledAt).getTime(),
+          ) || []
+      )
+    }
+  }, [reminders, isSortAsc, shouldHideCompleted])
+
   return {
-    reminders: reminders || [],
+    reminders: sortedReminders,
     isOpenDelete,
     isOpenDetails,
     selectedReminder,
@@ -140,6 +178,8 @@ export function useReminders() {
     postSnoozeStatus,
     deleteReminderStatus,
     snoozeId,
+    shouldHideCompleted,
+    isSortAsc,
     handleOpenDelete,
     handleOpenDetails,
     handleCloseDelete,
@@ -149,5 +189,7 @@ export function useReminders() {
     handleConfirmDelete,
     handleSnooze,
     handleRefetchReminderDetails,
+    handleSortToggle,
+    handleHideCompletedToggle,
   }
 }

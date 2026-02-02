@@ -42,5 +42,21 @@ export function Button(props: ButtonProps) {
       const { label, handleClick } = props
       return <AddNew label={label} handleClick={handleClick} />
     }
+    case "toggle-icon": {
+      const { icon, handleClick, className } = props
+      return (
+        <UIButton
+          type="button"
+          variant="ghost"
+          className={`hover:cursor-pointer rounded-full ${className ?? ""}`}
+          onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
+            handleClick()
+            e.preventDefault()
+          }}
+        >
+          {icon}
+        </UIButton>
+      )
+    }
   }
 }

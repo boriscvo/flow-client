@@ -16,6 +16,8 @@ export function Reminders() {
     postSnoozeStatus,
     deleteReminderStatus,
     snoozeId,
+    shouldHideCompleted,
+    isSortAsc,
     handleOpenDelete,
     handleOpenDetails,
     handleCloseDelete,
@@ -25,6 +27,8 @@ export function Reminders() {
     handleConfirmDelete,
     handleSnooze,
     handleRefetchReminderDetails,
+    handleSortToggle,
+    handleHideCompletedToggle,
   } = useReminders()
 
   const {
@@ -50,7 +54,12 @@ export function Reminders() {
         shouldShowAddNew={
           reminders.length > 0 && fetchRemindersStatus === "success"
         }
+        shouldHideCompleted={shouldHideCompleted}
+        isSortAsc={isSortAsc}
+        isError={fetchRemindersStatus === "error"}
+        handleHideCompleted={handleHideCompletedToggle}
         handleClick={handleNewFormOpen}
+        handleSort={handleSortToggle}
       />
       <Container>
         <Content
